@@ -64,6 +64,19 @@ jobs:
           cliclick kp:space
           sleep 1
           cliclick kp:space
+          dialog_exists() {
+            osascript -e 'tell application "System Events"
+            set allWindows to name of every window of every process
+            return allWindows contains "Hammerspoon wants access"
+            end tell' 2>/dev/null
+          }
+          while ! dialog_exists; do
+          echo "Waiting for dialog..."
+          sleep 1
+          done
+          echo "Dialog detected! Clicking Allow..."
+          cliclick c:570,371
+          cliclick kp:tab kp:tab kp:space
           killall Hammerspoon
       - id: start-hammerspoon
         run: open /Applications/Hammerspoon.app && sleep 5
