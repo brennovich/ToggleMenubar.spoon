@@ -54,9 +54,11 @@ jobs:
         run: |
           mkdir -p ~/.hammerspoon/Spoons
           unzip ToggleMenubar.spoon.zip -d ~/.hammerspoon/Spoons/
+      - id: install-tccutil
+        run: brew install tccutil
       - id: grant-accessibility-permissions
         run: |
-          sqlite3 ~/Library/Application\ Support/com.apple.TCC/TCC.db "INSERT OR REPLACE INTO access VALUES('kTCCServiceAccessibility','org.hammerspoon.Hammerspoon',0,2,4,1,NULL,NULL,0,'UNUSED',NULL,0,1687450000);"
+          sudo tccutil enable Accessibility org.hammerspoon.Hammerspoon
           sleep 2
       - id: start-hammerspoon
         run: open /Applications/Hammerspoon.app && sleep 5
