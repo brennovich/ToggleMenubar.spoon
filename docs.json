@@ -1,0 +1,174 @@
+[
+  {
+    "Constant" : [
+
+    ],
+    "submodules" : [
+
+    ],
+    "Function" : [
+
+    ],
+    "Variable" : [
+      {
+        "def" : "ToggleMenubar.gap",
+        "stripped_doc" : [
+          "Gap size in pixels for grid margins. Default is 10"
+        ],
+        "desc" : "Gap size in pixels for grid margins. Default is 10",
+        "doc" : "Gap size in pixels for grid margins. Default is 10",
+        "notes" : [
+
+        ],
+        "signature" : "ToggleMenubar.gap",
+        "type" : "Variable",
+        "returns" : [
+
+        ],
+        "name" : "gap",
+        "parameters" : [
+
+        ]
+      }
+    ],
+    "stripped_doc" : [
+
+    ],
+    "desc" : "Toggle macOS menubar visibility while maintaining consistent window grid margins",
+    "Deprecated" : [
+
+    ],
+    "type" : "Module",
+    "Constructor" : [
+
+    ],
+    "items" : [
+      {
+        "def" : "ToggleMenubar.gap",
+        "stripped_doc" : [
+          "Gap size in pixels for grid margins. Default is 10"
+        ],
+        "desc" : "Gap size in pixels for grid margins. Default is 10",
+        "doc" : "Gap size in pixels for grid margins. Default is 10",
+        "notes" : [
+
+        ],
+        "signature" : "ToggleMenubar.gap",
+        "type" : "Variable",
+        "returns" : [
+
+        ],
+        "name" : "gap",
+        "parameters" : [
+
+        ]
+      },
+      {
+        "def" : "ToggleMenubar:init()",
+        "stripped_doc" : [
+          "Initializes the spoon",
+          ""
+        ],
+        "desc" : "Initializes the spoon",
+        "doc" : "Initializes the spoon\n\nParameters:\n* None\n\nReturns:\n* The ToggleMenubar object",
+        "notes" : [
+
+        ],
+        "signature" : "ToggleMenubar:init()",
+        "type" : "Method",
+        "returns" : [
+          "* The ToggleMenubar object"
+        ],
+        "name" : "init",
+        "parameters" : [
+          "* None",
+          ""
+        ]
+      },
+      {
+        "def" : "ToggleMenubar:toggle([deps])",
+        "stripped_doc" : [
+          "Toggles the macOS menubar visibility and reapplies grid configuration",
+          ""
+        ],
+        "desc" : "Toggles the macOS menubar visibility and reapplies grid configuration",
+        "doc" : "Toggles the macOS menubar visibility and reapplies grid configuration\n\nParameters:\n* deps - Optional table with dependencies for testing. Keys: execute, osascript, timer, grid\n\nReturns:\n* None\n\nNotes:\n* Reads current menubar state from NSGlobalDomain _HIHideMenuBar preference\n* Uses AppleScript to toggle the autohide preference\n* Waits 0.5 seconds for system animation before reapplying grid margins\n* This ensures window positioning remains consistent whether menubar is visible or hidden",
+        "notes" : [
+          "* Reads current menubar state from NSGlobalDomain _HIHideMenuBar preference",
+          "* Uses AppleScript to toggle the autohide preference",
+          "* Waits 0.5 seconds for system animation before reapplying grid margins",
+          "* This ensures window positioning remains consistent whether menubar is visible or hidden"
+        ],
+        "signature" : "ToggleMenubar:toggle([deps])",
+        "type" : "Method",
+        "returns" : [
+          "* None",
+          ""
+        ],
+        "name" : "toggle",
+        "parameters" : [
+          "* deps - Optional table with dependencies for testing. Keys: execute, osascript, timer, grid",
+          ""
+        ]
+      }
+    ],
+    "Method" : [
+      {
+        "def" : "ToggleMenubar:init()",
+        "stripped_doc" : [
+          "Initializes the spoon",
+          ""
+        ],
+        "desc" : "Initializes the spoon",
+        "doc" : "Initializes the spoon\n\nParameters:\n* None\n\nReturns:\n* The ToggleMenubar object",
+        "notes" : [
+
+        ],
+        "signature" : "ToggleMenubar:init()",
+        "type" : "Method",
+        "returns" : [
+          "* The ToggleMenubar object"
+        ],
+        "name" : "init",
+        "parameters" : [
+          "* None",
+          ""
+        ]
+      },
+      {
+        "def" : "ToggleMenubar:toggle([deps])",
+        "stripped_doc" : [
+          "Toggles the macOS menubar visibility and reapplies grid configuration",
+          ""
+        ],
+        "desc" : "Toggles the macOS menubar visibility and reapplies grid configuration",
+        "doc" : "Toggles the macOS menubar visibility and reapplies grid configuration\n\nParameters:\n* deps - Optional table with dependencies for testing. Keys: execute, osascript, timer, grid\n\nReturns:\n* None\n\nNotes:\n* Reads current menubar state from NSGlobalDomain _HIHideMenuBar preference\n* Uses AppleScript to toggle the autohide preference\n* Waits 0.5 seconds for system animation before reapplying grid margins\n* This ensures window positioning remains consistent whether menubar is visible or hidden",
+        "notes" : [
+          "* Reads current menubar state from NSGlobalDomain _HIHideMenuBar preference",
+          "* Uses AppleScript to toggle the autohide preference",
+          "* Waits 0.5 seconds for system animation before reapplying grid margins",
+          "* This ensures window positioning remains consistent whether menubar is visible or hidden"
+        ],
+        "signature" : "ToggleMenubar:toggle([deps])",
+        "type" : "Method",
+        "returns" : [
+          "* None",
+          ""
+        ],
+        "name" : "toggle",
+        "parameters" : [
+          "* deps - Optional table with dependencies for testing. Keys: execute, osascript, timer, grid",
+          ""
+        ]
+      }
+    ],
+    "Command" : [
+
+    ],
+    "Field" : [
+
+    ],
+    "doc" : "Toggle macOS menubar visibility while maintaining consistent window grid margins\n\nDownload: [https:\/\/github.com\/brennovich\/ToggleMenubar.spoon](https:\/\/github.com\/brennovich\/ToggleMenubar.spoon)",
+    "name" : "ToggleMenubar"
+  }
+]
