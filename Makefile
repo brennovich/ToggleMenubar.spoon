@@ -10,6 +10,7 @@ docs.json: init.lua
 
 install-deps:
 	luarocks install --local --only-deps togglemenubar-1.0-1.rockspec
+	luarocks install --local luaunit
 
 test:
 	eval $$(luarocks --local path) && lua tests/test.lua -o TAP
