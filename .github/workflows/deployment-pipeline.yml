@@ -54,10 +54,33 @@ jobs:
         run: |
           mkdir -p ~/.hammerspoon/Spoons
           unzip ToggleMenubar.spoon.zip -d ~/.hammerspoon/Spoons/
+      - id: grant-accessibility-permissions
+        run: |
+          brew install tccutil
+          sudo tccutil --insert /Applications/Hammerspoon.app/Contents/MacOS/Hammerspoon
+          sudo tccutil --enable /Applications/Hammerspoon.app/Contents/MacOS/Hammerspoon
+          sudo tccutil --insert com.apple.Terminal
+          sudo tccutil --enable com.apple.Terminal
+          sleep 2
       - id: start-hammerspoon
-        run: open /Applications/Hammerspoon.app && sleep 5
+        run: |
+          /Applications/Hammerspoon.app/Contents/MacOS/Hammerspoon &
+          sleep 5
       - id: test-spoon-load
         run: hs -c "hs.loadSpoon('ToggleMenubar'); print(spoon.ToggleMenubar ~= nil and 'SUCCESS' or 'FAILED')" | grep SUCCESS
+      - id: test-toggle-function
+        run: |
+          mkdir -p screenshots
+          screencapture -x screenshots/before.png
+          hs -c "spoon.ToggleMenubar:toggle()" && sleep 2
+          screencapture -x screenshots/menubar-hidden.png
+          hs -c "spoon.ToggleMenubar:toggle()" && sleep 2
+          screencapture -x screenshots/menubar-visible.png
+      - id: upload-screenshots
+        uses: actions/upload-artifact@v5
+        with:
+          name: acceptance-screenshots
+          path: screenshots/
 
   release:
     needs: [acceptance]
