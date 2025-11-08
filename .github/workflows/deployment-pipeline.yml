@@ -64,10 +64,12 @@ jobs:
           cliclick kp:space
           sleep 1
           cliclick kp:space
+          cliclick c:570,371
+          cliclick kp:tab kp:tab kp:space
           dialog_exists() {
             osascript -e 'tell application "System Events"
             set allWindows to name of every window of every process
-            return allWindows contains "Hammerspoon wants access"
+            return allWindows contains "wants access"
             end tell' 2>/dev/null
           }
           while ! dialog_exists; do
