@@ -54,19 +54,11 @@ jobs:
         run: |
           mkdir -p ~/.hammerspoon/Spoons
           unzip ToggleMenubar.spoon.zip -d ~/.hammerspoon/Spoons/
+      - id: grant-accessibility-permissions
+        run: |
+          sudo sqlite3 /Library/Application\ Support/com.apple.TCC/TCC.db "INSERT OR REPLACE INTO access VALUES('kTCCServiceAccessibility','org.hammerspoon.Hammerspoon',0,2,3,1,NULL,NULL,NULL,'UNUSED',NULL,0,1687450000);"
       - id: start-hammerspoon
         run: open /Applications/Hammerspoon.app && sleep 5
-      - id: wait-for-cli
-        run: |
-          for i in {1..30}; do
-            if command -v hs &> /dev/null; then
-              echo "CLI ready"
-              exit 0
-            fi
-            sleep 1
-          done
-          echo "CLI installation timeout"
-          exit 1
       - id: test-spoon-load
         run: hs -c "hs.loadSpoon('ToggleMenubar'); print(spoon.ToggleMenubar ~= nil and 'SUCCESS' or 'FAILED')" | grep SUCCESS
       - id: test-toggle-function
@@ -74,19 +66,13 @@ jobs:
           mkdir -p screenshots
           hs -c "hs.loadSpoon('ToggleMenubar'); spoon.ToggleMenubar:toggle()" && sleep 1
           screencapture -x screenshots/menubar-hidden.png
-          hs -c "spoon.ToggleMenubar:toggle()" && sleep 1
+          hs -c "hs.loadSpoon('ToggleMenubar'); spoon.ToggleMenubar:toggle()" && sleep 1
           screencapture -x screenshots/menubar-visible.png
-          echo "## Acceptance Test Screenshots" >> $GITHUB_STEP_SUMMARY
-          echo "### Menubar Hidden" >> $GITHUB_STEP_SUMMARY
-          echo "![Menubar Hidden](screenshots/menubar-hidden.png)" >> $GITHUB_STEP_SUMMARY
-          echo "### Menubar Visible" >> $GITHUB_STEP_SUMMARY
-          echo "![Menubar Visible](screenshots/menubar-visible.png)" >> $GITHUB_STEP_SUMMARY
       - id: upload-screenshots
         uses: actions/upload-artifact@v5
         with:
           name: acceptance-screenshots
           path: screenshots/
-          retention-days: 7
 
   release:
     needs: [acceptance]
