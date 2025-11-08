@@ -58,7 +58,8 @@ jobs:
         run: brew install tccutil
       - id: grant-accessibility-permissions
         run: |
-          sudo tccutil enable Accessibility org.hammerspoon.Hammerspoon
+          sudo tccutil --insert org.hammerspoon.Hammerspoon
+          sudo tccutil --enable org.hammerspoon.Hammerspoon
           sleep 2
       - id: start-hammerspoon
         run: open /Applications/Hammerspoon.app && sleep 5
