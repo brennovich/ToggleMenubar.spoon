@@ -54,3 +54,13 @@ To generate documentation for the spoon, run the following command in the termin
 ```bash
 make docs.json
 ```
+
+## Release
+
+The project uses GitHub Actions to automate testing, packaging, and releases. On every push to main, the pipeline:
+
+1. **Commit** - Runs tests and generates the release candidate artifact
+2. **Acceptance** - Validates the packaged spoon loads in Hammerspoon
+3. **Release** - Creates a versioned GitHub release with ToggleMenubar.spoon.zip
+
+Releases use semantic versioning based on conventional commit messages (feat, fix, chore, etc.).
