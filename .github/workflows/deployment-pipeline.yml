@@ -54,13 +54,17 @@ jobs:
         run: |
           mkdir -p ~/.hammerspoon/Spoons
           unzip ToggleMenubar.spoon.zip -d ~/.hammerspoon/Spoons/
-      - id: install-tccutil
-        run: brew install tccutil
       - id: grant-accessibility-permissions
         run: |
+          brew install tccutil cliclick
           sudo tccutil --insert org.hammerspoon.Hammerspoon
           sudo tccutil --enable org.hammerspoon.Hammerspoon
           sleep 2
+          open /Applications/Hammerspoon.app && sleep 5
+          cliclick kp:space
+          sleep 1
+          cliclick kp:space
+          killall Hammerspoon
       - id: start-hammerspoon
         run: open /Applications/Hammerspoon.app && sleep 5
       - id: test-spoon-load
