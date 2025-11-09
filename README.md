@@ -47,6 +47,14 @@ To install test dependencies:
 make install-deps
 ```
 
+## Acceptance Tests
+
+By running `make acceptance-test`, the acceptance test suite will run a simple script that expects the spoon to be already loaded in Hammerspoon and will toggle the menubar state and verify the state change using OCR to read the menubar text and determine its state.
+
+Requirements:
+- tesseract OCR installed (`brew install tesseract`)
+- Hammerspoon running with ToggleMenubar spoon loaded
+
 ### Docs
 
 To generate documentation for the spoon, run the following command in the terminal:

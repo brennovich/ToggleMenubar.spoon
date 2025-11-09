@@ -43,6 +43,7 @@ jobs:
     needs: [commit]
     runs-on: macos-latest
     steps:
+      - uses: actions/checkout@v5
       - uses: actions/download-artifact@v5
         with:
           name: release-candidate
@@ -68,19 +69,15 @@ jobs:
           sleep 5
       - id: test-spoon-load
         run: hs -c "hs.loadSpoon('ToggleMenubar'); print(spoon.ToggleMenubar ~= nil and 'SUCCESS' or 'FAILED')" | grep SUCCESS
-      - id: test-toggle-function
+      - id: acceptance-test
         run: |
-          mkdir -p screenshots
-          screencapture -x screenshots/before.png
-          hs -c "spoon.ToggleMenubar:toggle()" && sleep 2
-          screencapture -x screenshots/menubar-hidden.png
-          hs -c "spoon.ToggleMenubar:toggle()" && sleep 2
-          screencapture -x screenshots/menubar-visible.png
+          brew install tesseract
+          make acceptance-test
       - id: upload-screenshots
         uses: actions/upload-artifact@v5
         with:
           name: acceptance-screenshots
-          path: screenshots/
+          path: .tmp/screenshots/
 
   release:
     needs: [acceptance]

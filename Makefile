@@ -1,4 +1,4 @@
-.PHONY: test install-deps
+.PHONY: test install-deps acceptance-test
 
 build: docs.json
 	mkdir -p release/ToggleMenubar.spoon
@@ -14,3 +14,6 @@ install-deps:
 
 test:
 	eval $$(luarocks --local path) && lua tests/test.lua -o TAP
+
+acceptance-test:
+	./tests/acceptance.sh
