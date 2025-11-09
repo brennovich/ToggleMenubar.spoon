@@ -13,10 +13,12 @@
       {
         "def" : "ToggleMenubar.gap",
         "stripped_doc" : [
-          "Gap size in pixels for grid margins. Default is 10"
+          "Gap size in pixels for grid margins. Default is 0. Only useful if you use hs.grid."
         ],
-        "desc" : "Gap size in pixels for grid margins. Default is 10",
-        "doc" : "Gap size in pixels for grid margins. Default is 10",
+        "parameters" : [
+
+        ],
+        "doc" : "Gap size in pixels for grid margins. Default is 0. Only useful if you use hs.grid.",
         "notes" : [
 
         ],
@@ -26,91 +28,42 @@
 
         ],
         "name" : "gap",
+        "desc" : "Gap size in pixels for grid margins. Default is 0. Only useful if you use hs.grid."
+      },
+      {
+        "def" : "ToggleMenubar.hsGridIntegration",
+        "stripped_doc" : [
+          "Enable hs.grid integration. When true, reapplies grid configuration after toggling menubar. Default is false. Automatically set to true when gap is configured."
+        ],
         "parameters" : [
 
-        ]
+        ],
+        "doc" : "Enable hs.grid integration. When true, reapplies grid configuration after toggling menubar. Default is false. Automatically set to true when gap is configured.",
+        "notes" : [
+
+        ],
+        "signature" : "ToggleMenubar.hsGridIntegration",
+        "type" : "Variable",
+        "returns" : [
+
+        ],
+        "name" : "hsGridIntegration",
+        "desc" : "Enable hs.grid integration. When true, reapplies grid configuration after toggling menubar. Default is false. Automatically set to true when gap is configured."
       }
     ],
     "stripped_doc" : [
 
     ],
-    "desc" : "Toggle macOS menubar visibility while maintaining consistent window grid margins",
+    "type" : "Module",
+    "desc" : "Toggle macOS menubar autohide setting. It's always annoying to change the autohide of the menubar, sometimes I just want to control it as easy as it is to do with the Dock (e.g. cmd+opt+D). So I created a spoon that will toggle the autohide setting of the menubar.",
     "Deprecated" : [
 
     ],
-    "type" : "Module",
     "Constructor" : [
 
     ],
-    "items" : [
-      {
-        "def" : "ToggleMenubar.gap",
-        "stripped_doc" : [
-          "Gap size in pixels for grid margins. Default is 10"
-        ],
-        "desc" : "Gap size in pixels for grid margins. Default is 10",
-        "doc" : "Gap size in pixels for grid margins. Default is 10",
-        "notes" : [
+    "Field" : [
 
-        ],
-        "signature" : "ToggleMenubar.gap",
-        "type" : "Variable",
-        "returns" : [
-
-        ],
-        "name" : "gap",
-        "parameters" : [
-
-        ]
-      },
-      {
-        "def" : "ToggleMenubar:init()",
-        "stripped_doc" : [
-          "Initializes the spoon",
-          ""
-        ],
-        "desc" : "Initializes the spoon",
-        "doc" : "Initializes the spoon\n\nParameters:\n* None\n\nReturns:\n* The ToggleMenubar object",
-        "notes" : [
-
-        ],
-        "signature" : "ToggleMenubar:init()",
-        "type" : "Method",
-        "returns" : [
-          "* The ToggleMenubar object"
-        ],
-        "name" : "init",
-        "parameters" : [
-          "* None",
-          ""
-        ]
-      },
-      {
-        "def" : "ToggleMenubar:toggle([deps])",
-        "stripped_doc" : [
-          "Toggles the macOS menubar visibility and reapplies grid configuration",
-          ""
-        ],
-        "desc" : "Toggles the macOS menubar visibility and reapplies grid configuration",
-        "doc" : "Toggles the macOS menubar visibility and reapplies grid configuration\n\nParameters:\n* deps - Optional table with dependencies for testing. Keys: execute, osascript, timer, grid\n\nReturns:\n* None\n\nNotes:\n* Reads current menubar state from NSGlobalDomain _HIHideMenuBar preference\n* Uses AppleScript to toggle the autohide preference\n* Waits 0.5 seconds for system animation before reapplying grid margins\n* This ensures window positioning remains consistent whether menubar is visible or hidden",
-        "notes" : [
-          "* Reads current menubar state from NSGlobalDomain _HIHideMenuBar preference",
-          "* Uses AppleScript to toggle the autohide preference",
-          "* Waits 0.5 seconds for system animation before reapplying grid margins",
-          "* This ensures window positioning remains consistent whether menubar is visible or hidden"
-        ],
-        "signature" : "ToggleMenubar:toggle([deps])",
-        "type" : "Method",
-        "returns" : [
-          "* None",
-          ""
-        ],
-        "name" : "toggle",
-        "parameters" : [
-          "* deps - Optional table with dependencies for testing. Keys: execute, osascript, timer, grid",
-          ""
-        ]
-      }
     ],
     "Method" : [
       {
@@ -119,7 +72,10 @@
           "Initializes the spoon",
           ""
         ],
-        "desc" : "Initializes the spoon",
+        "parameters" : [
+          "* None",
+          ""
+        ],
         "doc" : "Initializes the spoon\n\nParameters:\n* None\n\nReturns:\n* The ToggleMenubar object",
         "notes" : [
 
@@ -130,23 +86,23 @@
           "* The ToggleMenubar object"
         ],
         "name" : "init",
-        "parameters" : [
-          "* None",
-          ""
-        ]
+        "desc" : "Initializes the spoon"
       },
       {
         "def" : "ToggleMenubar:toggle([deps])",
         "stripped_doc" : [
-          "Toggles the macOS menubar visibility and reapplies grid configuration",
+          "Toggles the macOS menubar autohide setting and reapplies grid configuration if hsGridIntegration is enabled.",
           ""
         ],
-        "desc" : "Toggles the macOS menubar visibility and reapplies grid configuration",
-        "doc" : "Toggles the macOS menubar visibility and reapplies grid configuration\n\nParameters:\n* deps - Optional table with dependencies for testing. Keys: execute, osascript, timer, grid\n\nReturns:\n* None\n\nNotes:\n* Reads current menubar state from NSGlobalDomain _HIHideMenuBar preference\n* Uses AppleScript to toggle the autohide preference\n* Waits 0.5 seconds for system animation before reapplying grid margins\n* This ensures window positioning remains consistent whether menubar is visible or hidden",
+        "parameters" : [
+          "* deps - Optional table with dependencies. Keys: execute, osascript, timer, grid",
+          ""
+        ],
+        "doc" : "Toggles the macOS menubar autohide setting and reapplies grid configuration if hsGridIntegration is enabled.\n\nParameters:\n* deps - Optional table with dependencies. Keys: execute, osascript, timer, grid\n\nReturns:\n* None\n\nNotes:\n* Reads current menubar state from NSGlobalDomain _HIHideMenuBar preference\n* Uses AppleScript to toggle the autohide preference\n* Waits 0.5 seconds for system animation before reapplying grid margins if hsGridIntegration is true\n* This ensures window positioning remains consistent whether menubar is visible or hidden",
         "notes" : [
           "* Reads current menubar state from NSGlobalDomain _HIHideMenuBar preference",
           "* Uses AppleScript to toggle the autohide preference",
-          "* Waits 0.5 seconds for system animation before reapplying grid margins",
+          "* Waits 0.5 seconds for system animation before reapplying grid margins if hsGridIntegration is true",
           "* This ensures window positioning remains consistent whether menubar is visible or hidden"
         ],
         "signature" : "ToggleMenubar:toggle([deps])",
@@ -156,19 +112,103 @@
           ""
         ],
         "name" : "toggle",
-        "parameters" : [
-          "* deps - Optional table with dependencies for testing. Keys: execute, osascript, timer, grid",
-          ""
-        ]
+        "desc" : "Toggles the macOS menubar autohide setting and reapplies grid configuration if hsGridIntegration is enabled."
       }
     ],
     "Command" : [
 
     ],
-    "Field" : [
+    "items" : [
+      {
+        "def" : "ToggleMenubar.gap",
+        "stripped_doc" : [
+          "Gap size in pixels for grid margins. Default is 0. Only useful if you use hs.grid."
+        ],
+        "parameters" : [
 
+        ],
+        "doc" : "Gap size in pixels for grid margins. Default is 0. Only useful if you use hs.grid.",
+        "notes" : [
+
+        ],
+        "signature" : "ToggleMenubar.gap",
+        "type" : "Variable",
+        "returns" : [
+
+        ],
+        "name" : "gap",
+        "desc" : "Gap size in pixels for grid margins. Default is 0. Only useful if you use hs.grid."
+      },
+      {
+        "def" : "ToggleMenubar.hsGridIntegration",
+        "stripped_doc" : [
+          "Enable hs.grid integration. When true, reapplies grid configuration after toggling menubar. Default is false. Automatically set to true when gap is configured."
+        ],
+        "parameters" : [
+
+        ],
+        "doc" : "Enable hs.grid integration. When true, reapplies grid configuration after toggling menubar. Default is false. Automatically set to true when gap is configured.",
+        "notes" : [
+
+        ],
+        "signature" : "ToggleMenubar.hsGridIntegration",
+        "type" : "Variable",
+        "returns" : [
+
+        ],
+        "name" : "hsGridIntegration",
+        "desc" : "Enable hs.grid integration. When true, reapplies grid configuration after toggling menubar. Default is false. Automatically set to true when gap is configured."
+      },
+      {
+        "def" : "ToggleMenubar:init()",
+        "stripped_doc" : [
+          "Initializes the spoon",
+          ""
+        ],
+        "parameters" : [
+          "* None",
+          ""
+        ],
+        "doc" : "Initializes the spoon\n\nParameters:\n* None\n\nReturns:\n* The ToggleMenubar object",
+        "notes" : [
+
+        ],
+        "signature" : "ToggleMenubar:init()",
+        "type" : "Method",
+        "returns" : [
+          "* The ToggleMenubar object"
+        ],
+        "name" : "init",
+        "desc" : "Initializes the spoon"
+      },
+      {
+        "def" : "ToggleMenubar:toggle([deps])",
+        "stripped_doc" : [
+          "Toggles the macOS menubar autohide setting and reapplies grid configuration if hsGridIntegration is enabled.",
+          ""
+        ],
+        "parameters" : [
+          "* deps - Optional table with dependencies. Keys: execute, osascript, timer, grid",
+          ""
+        ],
+        "doc" : "Toggles the macOS menubar autohide setting and reapplies grid configuration if hsGridIntegration is enabled.\n\nParameters:\n* deps - Optional table with dependencies. Keys: execute, osascript, timer, grid\n\nReturns:\n* None\n\nNotes:\n* Reads current menubar state from NSGlobalDomain _HIHideMenuBar preference\n* Uses AppleScript to toggle the autohide preference\n* Waits 0.5 seconds for system animation before reapplying grid margins if hsGridIntegration is true\n* This ensures window positioning remains consistent whether menubar is visible or hidden",
+        "notes" : [
+          "* Reads current menubar state from NSGlobalDomain _HIHideMenuBar preference",
+          "* Uses AppleScript to toggle the autohide preference",
+          "* Waits 0.5 seconds for system animation before reapplying grid margins if hsGridIntegration is true",
+          "* This ensures window positioning remains consistent whether menubar is visible or hidden"
+        ],
+        "signature" : "ToggleMenubar:toggle([deps])",
+        "type" : "Method",
+        "returns" : [
+          "* None",
+          ""
+        ],
+        "name" : "toggle",
+        "desc" : "Toggles the macOS menubar autohide setting and reapplies grid configuration if hsGridIntegration is enabled."
+      }
     ],
-    "doc" : "Toggle macOS menubar visibility while maintaining consistent window grid margins\n\nDownload: [https:\/\/github.com\/brennovich\/ToggleMenubar.spoon](https:\/\/github.com\/brennovich\/ToggleMenubar.spoon)",
+    "doc" : "Toggle macOS menubar autohide setting. It's always annoying to change the autohide of the menubar, sometimes I just want to control it as easy as it is to do with the Dock (e.g. cmd+opt+D). So I created a spoon that will toggle the autohide setting of the menubar.\n\nDownload: [https:\/\/github.com\/brennovich\/ToggleMenubar.spoon](https:\/\/github.com\/brennovich\/ToggleMenubar.spoon)",
     "name" : "ToggleMenubar"
   }
 ]
