@@ -57,25 +57,29 @@ jobs:
       - id: grant-accessibility-permissions
         run: |
           brew install tccutil cliclick
+          sudo tccutil --insert /Applications/Hammerspoon.app/Contents/MacOS/Hammerspoon
+          sudo tccutil --enable /Applications/Hammerspoon.app/Contents/MacOS/Hammerspoon
           sudo tccutil --insert org.hammerspoon.Hammerspoon
           sudo tccutil --enable org.hammerspoon.Hammerspoon
+          sudo tccutil --insert com.apple.Terminal
+          sudo tccutil --enable com.apple.Terminal
           sleep 2
-          open /Applications/Hammerspoon.app && sleep 5
-          sleep 1
-          cliclick c:570,371
-          cliclick c:575,350
+          /Applications/Hammerspoon.app/Contents/MacOS/Hammerspoon &
+          sleep 5
           killall Hammerspoon
       - id: start-hammerspoon
-        run: open /Applications/Hammerspoon.app && sleep 5
+        run: |
+          /Applications/Hammerspoon.app/Contents/MacOS/Hammerspoon &
+          sleep 5
       - id: test-spoon-load
         run: hs -c "hs.loadSpoon('ToggleMenubar'); print(spoon.ToggleMenubar ~= nil and 'SUCCESS' or 'FAILED')" | grep SUCCESS
       - id: test-toggle-function
         run: |
           mkdir -p screenshots
           screencapture -x screenshots/before.png
-          hs -c "spoon.ToggleMenubar:toggle()" && sleep 1
+          hs -c "spoon.ToggleMenubar:toggle()" && sleep 2
           screencapture -x screenshots/menubar-hidden.png
-          hs -c "spoon.ToggleMenubar:toggle()" && sleep 1
+          hs -c "spoon.ToggleMenubar:toggle()" && sleep 2
           screencapture -x screenshots/menubar-visible.png
       - id: upload-screenshots
         uses: actions/upload-artifact@v5
