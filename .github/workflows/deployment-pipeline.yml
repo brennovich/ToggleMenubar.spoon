@@ -22,11 +22,7 @@ jobs:
       - id: test
         run: make test
       - id: install-hammerspoon
-        run: brew install hammerspoon --cask --no-quarantine
-      - id: enable-hs-cli
-        run: mkdir -p ~/.hammerspoon && echo "hs.ipc.cliInstall()" > ~/.hammerspoon/init.lua
-      - id: start-hammerspoon
-        run: open /Applications/Hammerspoon.app && sleep 5
+        uses: brennovich/action-setup-hammerspoon@v1
       - id: create-package
         run: make build
       - id: verify-artifact
@@ -48,25 +44,13 @@ jobs:
         with:
           name: release-candidate
       - id: install-hammerspoon
-        run: brew install hammerspoon --cask --no-quarantine
-      - id: enable-hs-cli
-        run: mkdir -p ~/.hammerspoon && echo "hs.ipc.cliInstall()" > ~/.hammerspoon/init.lua
+        uses: brennovich/action-setup-hammerspoon@v1
+        with:
+          accessibility-permissions: true
       - id: extract-spoon
         run: |
           mkdir -p ~/.hammerspoon/Spoons
           unzip ToggleMenubar.spoon.zip -d ~/.hammerspoon/Spoons/
-      - id: grant-accessibility-permissions
-        run: |
-          brew install tccutil
-          sudo tccutil --insert /Applications/Hammerspoon.app/Contents/MacOS/Hammerspoon
-          sudo tccutil --enable /Applications/Hammerspoon.app/Contents/MacOS/Hammerspoon
-          sudo tccutil --insert com.apple.Terminal
-          sudo tccutil --enable com.apple.Terminal
-          sleep 2
-      - id: start-hammerspoon
-        run: |
-          /Applications/Hammerspoon.app/Contents/MacOS/Hammerspoon &
-          sleep 5
       - id: test-spoon-load
         run: hs -c "hs.loadSpoon('ToggleMenubar'); print(spoon.ToggleMenubar ~= nil and 'SUCCESS' or 'FAILED')" | grep SUCCESS
       - id: acceptance-test
