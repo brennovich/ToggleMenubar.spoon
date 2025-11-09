@@ -61,14 +61,9 @@ jobs:
           sudo tccutil --enable org.hammerspoon.Hammerspoon
           sleep 2
           open /Applications/Hammerspoon.app && sleep 5
-          cliclick kp:space
-          sleep 1
-          cliclick kp:space
-          cliclick c:570,371
-          cliclick kp:tab kp:tab kp:space
           sleep 1
           cliclick c:570,371
-          cliclick kp:tab kp:tab kp:space
+          cliclick c:575,350
           killall Hammerspoon
       - id: start-hammerspoon
         run: open /Applications/Hammerspoon.app && sleep 5
@@ -77,6 +72,7 @@ jobs:
       - id: test-toggle-function
         run: |
           mkdir -p screenshots
+          screencapture -x screenshots/before.png
           hs -c "spoon.ToggleMenubar:toggle()" && sleep 1
           screencapture -x screenshots/menubar-hidden.png
           hs -c "spoon.ToggleMenubar:toggle()" && sleep 1
